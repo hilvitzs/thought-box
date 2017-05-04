@@ -5,10 +5,17 @@ import { ThoughtList } from './thoughtList.js';
 
 describe('ThoughtList', () => {
 
-  it.skip('has a thoughtList class field', () => {
+  it('has a thoughtList class field', () => {
+    const wrapper = shallow(<ThoughtList thoughts={[]}/>);
+
+    expect(wrapper.find('.thoughtList')).toHaveLength(1);
   });
 
-  it.skip('has multiple ThoughtCard class fields', () => {
+  it('has multiple ThoughtCard class fields', () => {
+    const thoughts = [{title: '', body: ''},{title: '', body: ''}]
+    const wrapper = mount(<ThoughtList thoughts={thoughts} />);
+
+    expect(wrapper.find('.thoughtCard')).toHaveLength(2);
   });
 
 });

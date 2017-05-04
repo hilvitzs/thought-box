@@ -5,22 +5,57 @@ import CreateThought from './createThought.js';
 
 describe('CreateThought', () => {
 
-  it.skip('has two input fields', () => {
+  it('has two input fields', () => {
+    const wrapper = shallow(<CreateThought />);
+
+    expect(wrapper.find('input').length).toBe(2);
   });
 
-  it.skip('has a default state containing a body and title both starting with empty string', () => {
+  it('has a default state containing a body and title both starting with empty string', () => {
+    const wrapper = mount(<CreateThought />);
+    const expectedState ={
+      title: '',
+      body: '',
+    }
+
+    expect(wrapper.state()).toEqual(expectedState)
   });
 
-  it.skip('fires an onChange event on user input which should update both state & the input field', () => {
+  it('fires an onChange event on user input which should update both state & the input field of title', () => {
+    const wrapper = mount(<CreateThought />);
+    const input = wrapper.find('input').first();
+    const expectedState = {
+      title: 'abc',
+      body: '',
+    };
+
+    input.simulate('change', { target: { value: 'abc' } });
+
+    expect(input.node.value).toEqual('abc');
+    expect(wrapper.state()).toEqual(expectedState);
   });
 
-  it.skip('fires onChange on second input which should update both state & the input field', () => {
+  it('fires onChange on second input which should update both state & the input field of body', () => {
+    const wrapper = mount(<CreateThought />);
+    const input = wrapper.find('input').last();
+    const expectedState = {
+      title: '',
+      body: 'abc',
+    };
+
+    input.simulate('change', { target: {value: 'abc' } });
+
+    expect(input.node.value).toEqual('abc');
+    expect(wrapper.state()).toEqual(expectedState);
   });
 
-  it.skip('has a submit button', () => {
+  it('has a submit button', () => {
+    const wrapper = shallow(<CreateThought />);
+
+    expect(wrapper.find('button').length).toBe(1);
   });
 
-  it.skip('fires submitIdea function with the data from state as an argument, and input fields go back to empty strings', () => {
+  it('fires submitIdea function with the data from state as an argument, and input fields go back to empty strings', () => {
     const mockedSubmit = jest.fn();
     const wrapper = mount(
       <CreateThought createThought={mockedSubmit} />
@@ -33,7 +68,10 @@ describe('CreateThought', () => {
     input.simulate('change', { target: { value: 'abc' } });
     wrapper.find('button').simulate('click');
 
-
+    expect(wrapper.state()).toEqual(expectedState);
+    expect(input.node.value).toEqual('');
+    expect(mockedSubmit).toHaveBeenCalledTimes(1);
+    expect(mockedSubmit).toHaveBeenCalledWith({title: '', body: 'abc'})
     // What input field are we trying to target? What is the action we want to simulate?
 
     // Find the DOM element you want to click on and click on that thing

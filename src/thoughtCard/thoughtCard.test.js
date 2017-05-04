@@ -5,10 +5,16 @@ import { ThoughtCard } from './thoughtCard.js';
 
 describe('ThoughtCard', () => {
 
-  it.skip('has a thoughtCard class field', () => {
+  it('has a thoughtCard class field', () => {
+    const wrapper = shallow(<ThoughtCard />);
+
+    expect(wrapper.find('.thoughtCard')).toHaveLength(1);
   });
 
-  it.skip('has a title and body', () => {
-  });
+  it('has a title and body', () => {
+    const wrapper = shallow(<ThoughtCard />);
 
+    expect(wrapper.find('.title')).toHaveLength(1);
+    expect(wrapper.find('.body')).toHaveLength(1);
+  });
 });

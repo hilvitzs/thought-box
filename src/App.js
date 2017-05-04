@@ -25,7 +25,7 @@ class App extends Component {
         </div>
         <CreateThought createThought={this.createThought.bind(this)} />
         <div>
-          <ThoughtList thoughtList={this.state.thoughts} />
+          <ThoughtList thoughts={this.state.thoughts} />
         </div>
       </div>
     );
